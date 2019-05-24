@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/WorkerManager.dir/main/main.cpp.o CMakeFiles/WorkerManager.dir/class/WorkerManager.cpp.o CMakeFiles/WorkerManager.dir/class/Employee.cpp.o CMakeFiles/WorkerManager.dir/class/Manager.cpp.o CMakeFiles/WorkerManager.dir/class/Boss.cpp.o  -o WorkerManager 

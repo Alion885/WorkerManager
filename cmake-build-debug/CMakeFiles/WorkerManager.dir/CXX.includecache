@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/evanmeek/CLionProjects/WorkerManager/class/WorkerManager.cpp
+iostream
+-
+fstream
+-
+../header/WorkerManager.h
+/home/evanmeek/CLionProjects/WorkerManager/header/WorkerManager.h
+../header/Employee.h
+/home/evanmeek/CLionProjects/WorkerManager/header/Employee.h
+../header/Manager.h
+/home/evanmeek/CLionProjects/WorkerManager/header/Manager.h
+../header/Boss.h
+/home/evanmeek/CLionProjects/WorkerManager/header/Boss.h
+
+/home/evanmeek/CLionProjects/WorkerManager/header/Boss.h
+iostream
+-
+Worker.h
+/home/evanmeek/CLionProjects/WorkerManager/header/Worker.h
+
+/home/evanmeek/CLionProjects/WorkerManager/header/Employee.h
+Worker.h
+/home/evanmeek/CLionProjects/WorkerManager/header/Worker.h
+
+/home/evanmeek/CLionProjects/WorkerManager/header/Manager.h
+iostream
+-
+Worker.h
+/home/evanmeek/CLionProjects/WorkerManager/header/Worker.h
+
+/home/evanmeek/CLionProjects/WorkerManager/header/Worker.h
+iostream
+-
+
+/home/evanmeek/CLionProjects/WorkerManager/header/WorkerManager.h
+Worker.h
+/home/evanmeek/CLionProjects/WorkerManager/header/Worker.h
+
