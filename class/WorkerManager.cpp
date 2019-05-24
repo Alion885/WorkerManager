@@ -17,14 +17,14 @@ using namespace std;
  */
 WorkerManager::WorkerManager() {
     this->workerCount = 0;
-    this->workerArr = NULL;
+    this->workerArr = nullptr;
 }
 
 /**
  * WorkerManager析构函数
  * @TODO 释放资源
  */
-WorkerManager::~WorkerManager() {}
+WorkerManager::~WorkerManager() = default;
 
 /**
  * 新增职工
@@ -38,9 +38,9 @@ void WorkerManager::addWorker() {
         //计算新空间大小
         int newSpaceSize = this->workerCount + addCount;
         //开辟新空间
-        Worker **newSpace = new Worker *[newSpaceSize];
+        auto **newSpace = new Worker *[newSpaceSize];
         //将原空间内容放到新空间下
-        if(workerArr!=NULL){
+        if(workerArr!=nullptr){
             for (int i = 0; i < this->workerCount; ++i) {
                 newSpace[i] = workerArr[i];
             }
@@ -56,11 +56,10 @@ void WorkerManager::addWorker() {
             cout << "请输入选择第" << j + 1 << "位职工的职位:" << endl;
             cout << "1.普通职工" << endl << "2.经理" << endl << "3.老板" << endl;
             cin >> deptID;
-            Worker *worker = NULL;
+            Worker *worker = nullptr;
             switch (deptID) {
                 case 1: {
                     worker = new Employee(id, name, deptID);
-                    worker->showInfo();
                     break;
                 }
                 case 2: {
@@ -76,7 +75,6 @@ void WorkerManager::addWorker() {
                     break;
             }
             newSpace[this->workerCount + j] = worker;
-            delete worker;
         }
         //释放原空间
         delete[]workerArr;
@@ -85,8 +83,9 @@ void WorkerManager::addWorker() {
         //更新员工个数
         this->workerCount = newSpaceSize;
         //提示信息
-        save();
         cout << "新增" << addCount << "名员工成功!" << endl;
+        //写入到文件内
+        save();
     } else {
         cout << "输入有误!" << endl;
         return;
@@ -97,11 +96,11 @@ void WorkerManager::addWorker() {
  * @TODO 只需要遍历出员工数组的指针即可
  */
 void WorkerManager::showWorkerInfo() {
-//    cout<<"职工ID\t\t职工姓名\t\t职工部门"<<endl;
-//    for (int i = 0; i < this->workerCount; ++i) {
-//        Worker * w = this->workerArr[i];
-//        w->showInfo();
-//    }
+    cout<<"职工ID\t\t职工姓名\t\t职工部门"<<endl;
+    for (int i = 0; i < this->workerCount; ++i) {
+        Worker * w = this->workerArr[i];
+        w->showInfo();
+    }
 }
 
 /*
@@ -128,7 +127,8 @@ void WorkerManager::save() {
     //写入流对象
     ofstream ofs("empInfo.txt",ios::out);
     for (int i = 0; i < workerCount; ++i) {
-        ofs<<workerArr[i]->id<<"\t\t"<<workerArr[i]->name<<"\t\t"<<workerArr[i]->id<<endl;
+        cout<<workerArr[i]->id<<"\t\t"<<workerArr[i]->name<<"\t\t"<<workerArr[i]->deptID<<endl;
+        ofs<<workerArr[i]->id<<"\t\t"<<workerArr[i]->name<<"\t\t"<<workerArr[i]->deptID<<endl;
     }
     ofs.close();
 }
@@ -136,5 +136,42 @@ void WorkerManager::save() {
 void WorkerManager::exitSystem() {
     cout << "欢迎再次使用本系统" << endl;
     exit(0);
+}
+
+/**
+ * 更新员工信息
+ */
+void WorkerManager::updateWorker() {
+    //指定员工的ID
+    int workerID;
+    //被更新员工的所在下标
+    int updateWorkerIndex = -1;
+    cout<<"请输入要修改的员工的ID:";
+    cin>>workerID;
+    for (int i = 0; i < workerCount; ++i) {
+        if(workerID==workerArr[i]->id){
+            updateWorkerIndex=i;
+        }
+    }
+    if(updateWorkerIndex==-1){
+        cout<<"修改失败!未找到此员工!"<<endl;
+        return;
+    }
+    cout<<"请输入"<<workerArr[updateWorkerIndex]->name<<"的ID";
+    cin>>workerArr[updateWorkerIndex]->id;
+    cout<<"请输入"<<workerArr[updateWorkerIndex]->name<<"的姓名";
+    cin>>workerArr[updateWorkerIndex]->name;
+    cout<<"请输入"<<workerArr[updateWorkerIndex]->name<<"的部门编号";
+    cin>>workerArr[updateWorkerIndex]->deptID;
+    save();
+    cout<<"修改成功!"<<endl;
+}
+
+void WorkerManager::findWorkerByName() {
+
+}
+
+void WorkerManager::findWorkerByID() {
+
 }
 

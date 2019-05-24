@@ -34,11 +34,12 @@ int main() {
             }
                 //显示所有职工人员信息
             case 2: {
-//                wm.showWorkerInfo();
+                wm.showWorkerInfo();
                 break;
             }
                 //修改
             case 3: {
+                wm.updateWorker();
                 break;
             }
                 //查找

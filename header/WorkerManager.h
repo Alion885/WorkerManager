@@ -26,6 +26,15 @@ public:
 
     //保存员工信息
     void save();
+
+    //修改员工信息
+    void updateWorker();
+
+    //查找员工信息-根据ID
+    void findWorkerByID();
+
+    //查找员工信息-根据姓名
+    void findWorkerByName();
 private:
     //员工总数
     int workerCount;
