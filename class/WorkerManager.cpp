@@ -40,7 +40,7 @@ void WorkerManager::addWorker() {
         //开辟新空间
         auto **newSpace = new Worker *[newSpaceSize];
         //将原空间内容放到新空间下
-        if(workerArr!=nullptr){
+        if (workerArr != nullptr) {
             for (int i = 0; i < this->workerCount; ++i) {
                 newSpace[i] = workerArr[i];
             }
@@ -91,14 +91,15 @@ void WorkerManager::addWorker() {
         return;
     }
 }
+
 /**
  * 显示所有员工信息
  * @TODO 只需要遍历出员工数组的指针即可
  */
 void WorkerManager::showWorkerInfo() {
-    cout<<"职工ID\t\t职工姓名\t\t职工部门"<<endl;
+    cout << "职工ID\t\t职工姓名\t\t职工部门" << endl;
     for (int i = 0; i < this->workerCount; ++i) {
-        Worker * w = this->workerArr[i];
+        Worker *w = this->workerArr[i];
         w->showInfo();
     }
 }
@@ -119,16 +120,17 @@ void WorkerManager::show_menu() {
     cout << "\t\t\t7.清空所有职工" << endl;
     cout << "--------------------------------------------------" << endl;
 }
+
 /**
  * 保存员工信息
  * @TODO 利用fstream将用户的信息保存
  */
 void WorkerManager::save() {
     //写入流对象
-    ofstream ofs("empInfo.txt",ios::out);
+    ofstream ofs("empInfo.txt", ios::out);
     for (int i = 0; i < workerCount; ++i) {
-        cout<<workerArr[i]->id<<"\t\t"<<workerArr[i]->name<<"\t\t"<<workerArr[i]->deptID<<endl;
-        ofs<<workerArr[i]->id<<"\t\t"<<workerArr[i]->name<<"\t\t"<<workerArr[i]->deptID<<endl;
+        cout << workerArr[i]->id << "\t\t" << workerArr[i]->name << "\t\t" << workerArr[i]->deptID << endl;
+        ofs << workerArr[i]->id << "\t\t" << workerArr[i]->name << "\t\t" << workerArr[i]->deptID << endl;
     }
     ofs.close();
 }
@@ -146,32 +148,88 @@ void WorkerManager::updateWorker() {
     int workerID;
     //被更新员工的所在下标
     int updateWorkerIndex = -1;
-    cout<<"请输入要修改的员工的ID:";
-    cin>>workerID;
+    cout << "请输入要修改的员工的ID:";
+    cin >> workerID;
     for (int i = 0; i < workerCount; ++i) {
-        if(workerID==workerArr[i]->id){
-            updateWorkerIndex=i;
+        if (workerID == workerArr[i]->id) {
+            updateWorkerIndex = i;
         }
     }
-    if(updateWorkerIndex==-1){
-        cout<<"修改失败!未找到此员工!"<<endl;
+    if (updateWorkerIndex == -1) {
+        cout << "修改失败!未找到此员工!" << endl;
         return;
     }
-    cout<<"请输入"<<workerArr[updateWorkerIndex]->name<<"的ID";
-    cin>>workerArr[updateWorkerIndex]->id;
-    cout<<"请输入"<<workerArr[updateWorkerIndex]->name<<"的姓名";
-    cin>>workerArr[updateWorkerIndex]->name;
-    cout<<"请输入"<<workerArr[updateWorkerIndex]->name<<"的部门编号";
-    cin>>workerArr[updateWorkerIndex]->deptID;
+    cout << "请输入" << workerArr[updateWorkerIndex]->name << "的ID";
+    cin >> workerArr[updateWorkerIndex]->id;
+    cout << "请输入" << workerArr[updateWorkerIndex]->name << "的姓名";
+    cin >> workerArr[updateWorkerIndex]->name;
+    cout << "请输入" << workerArr[updateWorkerIndex]->name << "的部门编号";
+    cin >> workerArr[updateWorkerIndex]->deptID;
     save();
-    cout<<"修改成功!"<<endl;
+    cout << "修改成功!" << endl;
 }
 
 void WorkerManager::findWorkerByName() {
-
+    //是否找到
+    bool isFind = false;
+    //要查询的员工姓名
+    string workerName;
+    //查询到的员工元素的下标
+    int *findIndex = new int[workerCount]();
+    cout << "请输入要查询的员工的姓名:";
+    cin >> workerName;
+    for (int i = 0; i < workerCount; ++i) {
+        if (workerArr[i]->name == workerName) {
+            workerArr[i]->showInfo();
+            isFind = true;
+        }
+    }
+    delete[] findIndex;
+    if (!isFind) {
+        cout << "很抱歉,未查询到姓名为 " << workerName << " 的员工." << endl;
+    }
 }
 
+/**
+ * 根据员工ID查询员工
+ * @TODO 如果没有查询到提示用户查无此人,有则输出员工信息
+ */
 void WorkerManager::findWorkerByID() {
+    //要查询的员工ID
+    int workerID;
+    cout << "请输入要查询的员工ID:";
+    cin >> workerID;
+    cout << "正在为您查询中,请稍等..." << endl;
+    for (int i = 0; i < workerCount; ++i) {
+        if (workerID == workerArr[i]->id) {
+            workerArr[i]->showInfo();
+            return;
+        }
+    }
+    cout << "很抱歉,未查询到ID为 " << workerID << " 的员工." << endl;
+}
 
+/**
+ * 查询员工信息
+ * @TODO 让用户选择查询方式
+ */
+void WorkerManager::findWorker() {
+    int choose(0);
+    cout << "请输入查询方式(1.按ID查询  2.按姓名查询):";
+    cin >> choose;
+    switch (choose) {
+        case 1: {
+            findWorkerByID();
+            break;
+        }
+        case 2: {
+            findWorkerByName();
+            break;
+        }
+        default: {
+            cout << "输入有误!" << endl;
+            break;
+        }
+    }
 }
 

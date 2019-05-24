@@ -44,6 +44,7 @@ int main() {
             }
                 //查找
             case 4: {
+                wm.findWorker();
                 break;
             }
                 //删除

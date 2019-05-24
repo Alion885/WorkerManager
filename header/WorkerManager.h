@@ -35,12 +35,13 @@ public:
 
     //查找员工信息-根据姓名
     void findWorkerByName();
+
+    //查找员工信息-调用两个不同条件查询的方法。
+    void findWorker();
 private:
     //员工总数
     int workerCount;
 
     //员工数组指针
     Worker ** workerArr;
-
-
 };
