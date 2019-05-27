@@ -47,6 +47,9 @@ public:
 
     //判断员工是否存在
     int isExist(int id);
+
+    //根据职工ID进行排序
+    void sortWorkerByID();
 private:
     //员工总数
     int workerCount;

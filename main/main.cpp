@@ -54,10 +54,12 @@ int main() {
             }
                 //排序
             case 6: {
+                wm.sortWorkerByID();
                 break;
             }
                 //清空
             case 7: {
+                wm.clearAllWorker();
                 break;
             }
             default: {
@@ -65,7 +67,7 @@ int main() {
                 break;
             }
         }
-
+        cout << "请按回车继续..." << endl;
+        cin.get();
     }
-
 }

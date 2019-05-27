@@ -97,9 +97,11 @@ void WorkerManager::addWorker() {
  */
 void WorkerManager::showWorkerInfo() {
     cout << "职工ID\t\t职工姓名\t\t职工部门" << endl;
-    for (int i = 0; i < this->workerCount; ++i) {
-        Worker *w = this->workerArr[i];
-        w->showInfo();
+    if (workerCount > 0) {
+        for (int i = 0; i < this->workerCount; ++i) {
+            Worker *w = this->workerArr[i];
+            w->showInfo();
+        }
     }
 }
 
@@ -125,17 +127,18 @@ void WorkerManager::show_menu() {
  * @TODO 利用fstream将用户的信息保存
  */
 void WorkerManager::save() {
-
-    //写入流对象
-    ofstream ofs("empInfo.txt", ios::out);
-    if(!ofs){
-        cout<<"数据文件丢失."<<endl;
-        return;
+    if (workerCount > 0) {
+        //写入流对象
+        ofstream ofs("empInfo.txt", ios::out);
+        if (!ofs) {
+            cout << "数据文件丢失." << endl;
+            return;
+        }
+        for (int i = 0; i < workerCount; ++i) {
+            ofs << workerArr[i]->id << "\t\t" << workerArr[i]->name << "\t\t" << workerArr[i]->deptID << endl;
+        }
+        ofs.close();
     }
-    for (int i = 0; i < workerCount; ++i) {
-        ofs << workerArr[i]->id << "\t\t" << workerArr[i]->name << "\t\t" << workerArr[i]->deptID << endl;
-    }
-    ofs.close();
 }
 
 void WorkerManager::exitSystem() {
@@ -240,7 +243,18 @@ void WorkerManager::findWorker() {
  * 删除所有员工
  */
 void WorkerManager::clearAllWorker() {
-
+    char choose('n');
+    cout << "你确定要清空所有职工信息?此操作不可恢复.[Y/n]";
+    cin >> choose;
+    if (choose == 'Y') {
+        delete[] workerArr;
+        workerCount = 0;
+        ofstream ofs("empInfo.txt", ios::out);
+        ofs.clear();
+        ofs.close();
+        cout << "已清空所有职工信息." << endl;
+    }
+    return;
 }
 
 /**
@@ -248,19 +262,19 @@ void WorkerManager::clearAllWorker() {
  */
 void WorkerManager::deleteWorker() {
     int workerID(0);
-    cout<<"请输入要删除的职工ID:";
-    cin>>workerID;
+    cout << "请输入要删除的职工ID:";
+    cin >> workerID;
     int index = isExist(workerID);
-    if(index!=-1){
-        for (int i = index; i <workerCount; ++i) {
-            workerArr[i]=workerArr[i+1];
+    if (index != -1) {
+        for (int i = index; i < workerCount; ++i) {
+            workerArr[i] = workerArr[i + 1];
         }
         workerCount--;
-        cout<<"删除成功!"<<endl;
+        cout << "删除成功!" << endl;
         save();
         return;
     }
-    cout<<"删除失败!职工不存在!"<<endl;
+    cout << "删除失败!职工不存在!" << endl;
 }
 
 /**
@@ -270,9 +284,55 @@ void WorkerManager::deleteWorker() {
  */
 int WorkerManager::isExist(int id) {
     for (int i = 0; i < workerCount; ++i) {
-        if(id==workerArr[i]->id)
+        if (id == workerArr[i]->id)
             return i;
     }
     return -1;
+}
+
+/**
+ * 根据职工ID进行排序
+ */
+void WorkerManager::sortWorkerByID() {
+    if (workerCount > 0) {
+        char choose;
+        //每轮最小的元素下标
+        int minIndex;
+        cout << "请输入排序的方式(1.升序\t2.降序):";
+        cin >> choose;
+        switch (choose) {
+            //升序
+            case '1': {
+                for (int i = 0; i < workerCount; ++i) {
+                    if (i == workerCount - 1) {
+                        return;
+                    }
+                    if (workerArr[i]->id > workerArr[i + 1]->id) {
+                        Worker *tmp = workerArr[i];
+                        workerArr[i] = workerArr[i + 1];
+                        workerArr[i + 1] = tmp;
+                    }
+                }
+                break;
+            }
+                //降序
+            case '2': {
+                for (int i = 0; i < workerCount; ++i) {
+                    if (i == workerCount - 1) {
+                        return;
+                    }
+                    if (workerArr[i]->id < workerArr[i + 1]->id) {
+                        Worker *tmp = workerArr[i];
+                        workerArr[i] = workerArr[i + 1];
+                        workerArr[i + 1] = tmp;
+                    }
+                }
+                break;
+            }
+            default:
+                cout << "输入有误!" << endl;
+                break;
+        }
+    }
 }
 
