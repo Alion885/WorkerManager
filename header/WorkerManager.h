@@ -38,6 +38,15 @@ public:
 
     //查找员工信息-调用两个不同条件查询的方法。
     void findWorker();
+
+    //删除指定的员工
+    void deleteWorker();
+
+    //清空所有员工
+    void clearAllWorker();
+
+    //判断员工是否存在
+    int isExist(int id);
 private:
     //员工总数
     int workerCount;

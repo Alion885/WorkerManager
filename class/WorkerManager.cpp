@@ -11,8 +11,7 @@
 
 using namespace std;
 
-/**
- * WorkerManager构造函数
+/*
  * @TODO 用于初始化
  */
 WorkerManager::WorkerManager() {
@@ -126,10 +125,14 @@ void WorkerManager::show_menu() {
  * @TODO 利用fstream将用户的信息保存
  */
 void WorkerManager::save() {
+
     //写入流对象
     ofstream ofs("empInfo.txt", ios::out);
+    if(!ofs){
+        cout<<"数据文件丢失."<<endl;
+        return;
+    }
     for (int i = 0; i < workerCount; ++i) {
-        cout << workerArr[i]->id << "\t\t" << workerArr[i]->name << "\t\t" << workerArr[i]->deptID << endl;
         ofs << workerArr[i]->id << "\t\t" << workerArr[i]->name << "\t\t" << workerArr[i]->deptID << endl;
     }
     ofs.close();
@@ -231,5 +234,45 @@ void WorkerManager::findWorker() {
             break;
         }
     }
+}
+
+/**
+ * 删除所有员工
+ */
+void WorkerManager::clearAllWorker() {
+
+}
+
+/**
+ * 删除指定的员工
+ */
+void WorkerManager::deleteWorker() {
+    int workerID(0);
+    cout<<"请输入要删除的职工ID:";
+    cin>>workerID;
+    int index = isExist(workerID);
+    if(index!=-1){
+        for (int i = index; i <workerCount; ++i) {
+            workerArr[i]=workerArr[i+1];
+        }
+        workerCount--;
+        cout<<"删除成功!"<<endl;
+        save();
+        return;
+    }
+    cout<<"删除失败!职工不存在!"<<endl;
+}
+
+/**
+ *判断职工是否存在
+ * @param id 职工id
+ * @return 职工的索引
+ */
+int WorkerManager::isExist(int id) {
+    for (int i = 0; i < workerCount; ++i) {
+        if(id==workerArr[i]->id)
+            return i;
+    }
+    return -1;
 }
 

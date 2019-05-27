@@ -44,19 +44,3 @@ iostream
 Worker.h
 /home/evanmeek/CLionProjects/WorkerManager/header/Worker.h
 
-/home/evanmeek/CLionProjects/WorkerManager/main/main.cpp
-iostream
--
-vector
--
-../header/WorkerManager.h
-/home/evanmeek/CLionProjects/WorkerManager/header/WorkerManager.h
-../header/Worker.h
-/home/evanmeek/CLionProjects/WorkerManager/header/Worker.h
-../header/Employee.h
-/home/evanmeek/CLionProjects/WorkerManager/header/Employee.h
-../header/Manager.h
-/home/evanmeek/CLionProjects/WorkerManager/header/Manager.h
-../header/Boss.h
-/home/evanmeek/CLionProjects/WorkerManager/header/Boss.h
-

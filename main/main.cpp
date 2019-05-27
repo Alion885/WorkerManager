@@ -49,7 +49,7 @@ int main() {
             }
                 //删除
             case 5: {
-
+                wm.deleteWorker();
                 break;
             }
                 //排序
