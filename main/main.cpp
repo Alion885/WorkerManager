@@ -13,7 +13,11 @@ int main() {
     //实例化职工管理系统
     WorkerManager wm;
     //用户的选择
-    int choose(-1), isExit(1);
+    int choose(-1), isExit(1),sys(-1);
+    while(sys==-1){
+      cout<<"请选择你的操作系统(1.Linux\t2.Windows):";
+      cin>>sys; 
+    }
     while (isExit) {
         vector<int> c;
         //显示菜单
@@ -67,7 +71,15 @@ int main() {
                 break;
             }
         }
-        cout << "请按回车继续..." << endl;
-        cin.get();
+        cout << "请按任意键继续..." << endl;
+        if(sys==1){
+          system("read -n 1");
+          cout<<endl;
+          system("clear");
+        }else{
+          system("pause");
+          cout<<endl;
+          system("cls");
+        }
     }
 }

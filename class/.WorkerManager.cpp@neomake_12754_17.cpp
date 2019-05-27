@@ -111,15 +111,15 @@ void WorkerManager::showWorkerInfo() {
  */
 void WorkerManager::show_menu() {
     cout << "---------欢迎使用职工管理系统---------" << endl;
-    cout << "\t0.退出系统" << endl;
-    cout << "\t1.增加职工信息" << endl;
-    cout << "\t2.显示职工信息" << endl;
-    cout << "\t3.修改职工信息" << endl;
-    cout << "\t4.查找职工信息" << endl;
-    cout << "\t5.删除职工信息" << endl;
-    cout << "\t6.按照编号排序" << endl;
-    cout << "\t7.清空所有职工" << endl;
-    cout << "--------------------------------------" << endl;
+    cout << "\t\t0.退出系统" << endl;
+    cout << "\t\t1.增加职工信息" << endl;
+    cout << "\t\t2.显示职工信息" << endl;
+    cout << "\t\t3.修改职工信息" << endl;
+    cout << "\t\t4.查找职工信息" << endl;
+    cout << "\t\t5.删除职工信息" << endl;
+    cout << "\t\t6.按照编号排序" << endl;
+    cout << "\t\t7.清空所有职工" << endl;
+    cout << "--------------------------------------------------" << endl;
 }
 
 /**
@@ -188,9 +188,8 @@ void WorkerManager::findWorkerByName() {
     cin >> workerName;
     for (int i = 0; i < workerCount; ++i) {
         if (workerArr[i]->name == workerName) {
-          cout<<"职工ID\t职工姓名\t职工职位"<<endl; 
-          workerArr[i]->showInfo();
-          isFind = true;
+            workerArr[i]->showInfo();
+            isFind = true;
         }
     }
     delete[] findIndex;
@@ -211,9 +210,8 @@ void WorkerManager::findWorkerByID() {
     cout << "正在为您查询中,请稍等..." << endl;
     for (int i = 0; i < workerCount; ++i) {
         if (workerID == workerArr[i]->id) {
-          cout<<"职工ID\t职工姓名\t职工职位"<<endl; 
-          workerArr[i]->showInfo();
-          return;
+            workerArr[i]->showInfo();
+            return;
         }
     }
     cout << "很抱歉,未查询到ID为 " << workerID << " 的员工." << endl;

@@ -14,7 +14,7 @@ Boss::Boss(int id, string name, int deptID) {
 }
 
 void Boss::showInfo() {
-    cout << id << "\t\t\t\t\t" << name << "\t\t\t\t" << getDeptName() << endl;
+    cout << id << "\t" << name << "\t" << getDeptName() << endl;
 }
 
 string Boss::getDeptName() {
