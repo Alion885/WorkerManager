@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include <fstream>
+#include <algorithm>
+#include <functional>
 #include "../header/WorkerManager.h"
 #include "../header/Employee.h"
 #include "../header/Manager.h"
@@ -293,7 +295,6 @@ int WorkerManager::isExist(int id) {
     }
     return -1;
 }
-
 /**
  * 根据职工ID进行排序
  */
@@ -305,28 +306,28 @@ void WorkerManager::sortWorkerByID() {
         switch (choose) {
             //升序
             case '1': {
-                for (int i = 0; i < workerCount; ++i) {
-                    if (i == workerCount - 1) {
-                        return;
-                    }
-                    if (workerArr[i]->id > workerArr[i + 1]->id) {
-                        Worker *tmp = workerArr[i];
-                        workerArr[i] = workerArr[i + 1];
-                        workerArr[i + 1] = tmp;
+                for (int i = 0; i <workerCount; ++i) {
+                    for (int j = 0; j <workerCount-1-i; ++j) {
+                        if(workerArr[j]->id>workerArr[j+1]->id){
+                            Worker * tmp;
+                            tmp = workerArr[j];
+                            workerArr[j] = workerArr[j+1];
+                            workerArr[j+1] = tmp;
+                        }
                     }
                 }
                 break;
             }
                 //降序
             case '2': {
-                for (int i = 0; i < workerCount; ++i) {
-                    if (i == workerCount - 1) {
-                        return;
-                    }
-                    if (workerArr[i]->id < workerArr[i + 1]->id) {
-                        Worker *tmp = workerArr[i];
-                        workerArr[i] = workerArr[i + 1];
-                        workerArr[i + 1] = tmp;
+                for (int i = 0; i <workerCount; ++i) {
+                    for (int j = 0; j <workerCount-1-i; ++j) {
+                        if(workerArr[j]->id<workerArr[j+1]->id){
+                            Worker * tmp;
+                            tmp = workerArr[j];
+                            workerArr[j] = workerArr[j+1];
+                            workerArr[j+1] = tmp;
+                        }
                     }
                 }
                 break;

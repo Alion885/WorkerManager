@@ -7,7 +7,7 @@
 using namespace std;
 
 void Manager::showInfo() {
-    cout<<id<<"\t"<<name<<"\t"<<getDeptName()<<endl;
+    cout<<id<<"\t\t\t"<<name<<"\t\t\t"<<getDeptName()<<endl;
 }
 
 string Manager::getDeptName() {

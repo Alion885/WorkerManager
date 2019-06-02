@@ -5,7 +5,7 @@
 #include "../header/Employee.h"
 
 void Employee::showInfo() {
-    cout << id << "\t" << name << "\t" << getDeptName() << endl;
+    cout << id << "\t\t\t" << name << "\t\t\t" << getDeptName() << endl;
 }
 
 string Employee::getDeptName() {

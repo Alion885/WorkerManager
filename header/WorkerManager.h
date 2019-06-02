@@ -50,6 +50,7 @@ public:
 
     //根据职工ID进行排序
     void sortWorkerByID();
+
 private:
     //员工总数
     int workerCount;
